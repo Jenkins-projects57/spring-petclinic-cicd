@@ -38,7 +38,7 @@ pipeline{
                 sh 'sudo cp ~/.kube/config /var/lib/jenkins/.kube/'
                 sh 'sudo chmod 777 /var/lib/jenkins/'
                 sh 'sudo chmod 777 /var/lib/jenkins/config'
-                sh 'sudo az aks get-credentials --resource-group myResourceGroup --name myAKSCluster'
+                sh 'az aks get-credentials --resource-group myResourceGroup --name myAKSCluster'
                 sh 'kubectl apply -f .'
             }
         }
