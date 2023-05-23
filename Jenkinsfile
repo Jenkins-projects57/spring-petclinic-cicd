@@ -21,6 +21,7 @@ pipeline{
         }
         stage("Docker BUILD & PUSH"){
             steps{
+                withDockerRegistry([credentialsId: "docker_cred", url: "https://index.docker.io/v1/"])
                 sh 'docker image build -t spc:v2.0 .'
                 sh 'docker image tag spc:v2.0 srikanthvelma/spc:latest'
                 sh 'docker image tag spc:v2.0 srikanthvelma/spc:${BUILD_NUMBER}'
