@@ -1,5 +1,8 @@
 pipeline{
     agent 'any'
+    environment{
+        DOCKERHUB_CREDENTIALS = credentials('docker-cred')
+    }
     stages{
         stage("VCS"){
             steps{
@@ -21,13 +24,12 @@ pipeline{
         }
         stage("Docker BUILD & PUSH"){
             steps{
-                withDockerRegistry([credentialsId: "docker_cred", url: "https://index.docker.io/v1/"]){
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 sh 'docker image build -t spc:v2.0 .'
                 sh 'docker image tag spc:v2.0 srikanthvelma/spc:latest'
                 sh 'docker image tag spc:v2.0 srikanthvelma/spc:${BUILD_NUMBER}'
                 sh 'docker image push srikanthvelma/spc:${BUILD_NUMBER}'
                 sh 'docker image push srikanthvelma/spc:latest'
-                }
             }
         }
         stage("K8S DEPLOY"){
