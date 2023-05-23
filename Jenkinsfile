@@ -16,11 +16,12 @@ pipeline{
             steps{
                 archiveArtifacts artifacts: '**/target/spring-petclinic-3.0.0-SNAPSHOT.jar'
                 junit '**/surefire-reports/TEST-*.xml'
+                sh 'printenv'
             }
         }
         stage("Docker BUILD & PUSH"){
             steps{
-                sh 'docker image build -t spc:${BUILDNO}'
+                sh 'docker image build -t spc:${BUILDNO} .'
                 sh 'docker image push spc:${BUILDNO} srikanthvelma/spc:latest'
                 sh 'docker image push spc:${BUILDNO} srikanthvelma/spc:${BUILDNO}'
             }
