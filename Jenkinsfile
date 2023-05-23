@@ -22,8 +22,10 @@ pipeline{
         stage("Docker BUILD & PUSH"){
             steps{
                 sh 'docker image build -t spc:v2.0 .'
-                sh 'docker image push spc:v2.0 srikanthvelma/spc:latest'
-                sh 'docker image push spc:v2.0 srikanthvelma/spc:${BUILD_NUMBER}'
+                sh 'docker image tag spc:v2.0 srikanthvelma/spc:latest'
+                sh 'docker image tag spc:v2.0 srikanthvelma/spc:${BUILD_NUMBER}'
+                sh 'docker image push srikanthvelma/spc:latest'
+                sh 'docker image push srikanthvelma/spc:${BUILD_NUMBER}'
             }
         }
         stage("K8S DEPLOY"){
