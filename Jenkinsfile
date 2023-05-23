@@ -34,8 +34,8 @@ pipeline{
         }
         stage("K8S DEPLOY"){
             steps{
-                sh 'sudo az aks install-cli'
-                sh 'sudo az aks get-credentials --resource-group myResourceGroup --name myAKSCluster'
+                // sh 'sudo az aks install-cli'
+                // sh 'sudo az aks get-credentials --resource-group myResourceGroup --name myAKSCluster'
                 sh 'kubectl apply -f .'
             }
         }
