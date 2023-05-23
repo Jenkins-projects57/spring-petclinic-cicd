@@ -5,7 +5,7 @@ pipeline{
     stages{
         stage("VCS"){
             steps{
-                git url: https://github.com/Jenkins-projects57/spring-petclinic-cicd.git
+                git url 'https://github.com/Jenkins-projects57/spring-petclinic-cicd.git'
                     branch: 'main'
             }
         }
