@@ -38,7 +38,7 @@ pipeline{
                 // sh 'sudo chmod 777 /var/lib/jenkins/'
                 // sh 'sudo chmod 777 /var/lib/jenkins/config'
                 // sh 'az aks get-credentials --resource-group myResourceGroup --name myAKSCluster'
-                sh 'kubectl apply -f ./spring-petclinic-deploy.yaml'
+                sh 'kubectl apply -f .'
             }
         }
     }
