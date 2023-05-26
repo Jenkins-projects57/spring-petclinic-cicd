@@ -1,8 +1,8 @@
 pipeline{
     agent 'any'
-    environment{
-        DOCKERHUB_CREDENTIALS = credentials('docker-cred')
-    }
+    // environment{
+    //     DOCKERHUB_CREDENTIALS = credentials('docker-cred')
+    // }
     stages{
         stage("VCS"){
             steps{
@@ -19,12 +19,11 @@ pipeline{
             steps{
                 archiveArtifacts artifacts: '**/target/spring-petclinic-3.0.0-SNAPSHOT.jar'
                 junit '**/surefire-reports/TEST-*.xml'
-                sh 'printenv'
             }
         }
         stage("Docker BUILD & PUSH"){
             steps{
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                // sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 sh 'docker image build -t spc:v2.0 .'
                 sh 'docker image tag spc:v2.0 srikanthvelma/spc:latest'
                 sh 'docker image tag spc:v2.0 srikanthvelma/spc:${BUILD_NUMBER}'
