@@ -1,5 +1,6 @@
 pipeline{
     agent 'any'
+    triggers{ pollSCM('* * * * *') }
     // environment{
     //     DOCKERHUB_CREDENTIALS = credentials('docker-cred')
     // }
