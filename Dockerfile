@@ -1,5 +1,5 @@
 FROM alpine/git AS VCS
-RUN cd / && git clone https://github.com/Jenkins-projects57/spring-petclinic-cicd.git
+RUN cd / && git clone https://github.com/srikanthvelma/spring-petclinic.git
 
 FROM maven:3.9-amazoncorretto-17 AS Builder
 COPY --from=VCS /spring-petclinic-cicd /spring-petclinic
