@@ -3,7 +3,7 @@ RUN cd / && git clone https://github.com/Jenkins-projects57/spring-petclinic-cic
 
 FROM maven:3.9-amazoncorretto-17 AS Builder
 COPY --from=VCS /spring-petclinic-cicd /spring-petclinic
-RUN cd /spring-petclinic && mvn package
+RUN cd /spring-petclinic && mvn install -DskipTests
 
 FROM amazoncorretto:17-alpine-jdk
 LABEL author="srikanth" org="qt" project="multistage-spc"
